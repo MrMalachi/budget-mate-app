@@ -1,4 +1,5 @@
 from datetime import datetime
+from os.path import exists
 from pathlib import Path
 import json
 
@@ -13,6 +14,7 @@ class BudgetCalculator:
         self.wants_funds = 0
         self.budget_allocation = {}
         self.month = datetime.now().strftime("%B %Y")
+        self.file_path = "monthly_budget.json"
 
     def get_monthly_income(self):
         """Prompt user for their monthly income & return an integer."""
@@ -51,10 +53,26 @@ class BudgetCalculator:
             },
         }
 
-    def save_budget_allocation(self):
+    def load_monthly_budget(self):
+        """
+        Read JSON file, return dictionary, and if file does not exist,
+        return empty structure.
+        """
+        if exists(self.file_path):
+            with open(self.file_path, "r") as file:
+                data = json.load(file)
+                return data
+        else:
+            return {}
+
+    def save_to_monthly_budget(self):
         """Write the user's input & calculations to JSON file."""
         path = Path("monthly_budget.json")
         path.write_text(json.dumps(self.budget_allocation, indent=4), encoding="utf-8")
+
+    def update_monthly_budget(self):
+        """"""
+        pass
 
     def display_budget_summary(self):
         """A summarized view of money distribution based on 50/30/20 rule."""
@@ -63,17 +81,16 @@ class BudgetCalculator:
               f"\nNeeds Allocation (30%) - ${self.needs_funds}"
               f"\nWants Allocation (20%) - ${self.wants_funds}")
 
-    def run(self):
+    def run_budget_mate(self):
         """Orchestrator method runs based on order of operations."""
         self.get_monthly_income()
         self.calculate_budget_allocation()
         self.convert_budget_allocation_to_dict()
-        self.save_budget_allocation()
+        self.save_to_monthly_budget()
         self.display_budget_summary()
 
-
 budget = BudgetCalculator()
-budget.run()
+budget.run_budget_mate()
 
 
 

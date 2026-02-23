@@ -1,10 +1,10 @@
 {
     "month": "February 2026",
-    "income": 1000,
+    "income": 2000,
     "allocations": {
-        "debt": 500,
-        "needs": 300,
-        "wants": 200
+        "debt": 1000,
+        "needs": 600,
+        "wants": 400
     },
     "percentages": {
         "debt": 0.5,
