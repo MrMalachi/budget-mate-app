@@ -12,4 +12,4 @@ personal income based on a variation of the 50/30/20 rule (Debt/Needs/Wants).
 
 ## Refactoring Budget Mate
 * Cleanup the 'display_budget_summary' method when displaying updated earnings total amount & category allocations
-* 
+* Create a new method that displays a user friendly menu when called
