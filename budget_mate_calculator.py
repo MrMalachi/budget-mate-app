@@ -1,3 +1,4 @@
+import sys
 from datetime import datetime
 from pathlib import Path
 import json
@@ -21,6 +22,37 @@ class BudgetCalculator:
         self.month = datetime.now().strftime("%B %Y")
         self.data = self.load_monthly_budget()
 
+    def greet_user(self):
+        """Print a neat greeting message to the user."""
+        print(
+            "\nWelcome to Budget-Mate: "
+            "A Program Designed Around Money Management™"
+        )
+
+    def display_menu(self):
+        """Print the menu options for the user."""
+        print(
+            "\n--- BUDGET-MATE MENU ---"
+            "\n1. Add earnings"
+            "\n2. View Budget Mate summary"
+            "\n3. Exit"
+        )
+
+    def get_menu_choice(self):
+        """Prompt the user to select a menu option based on 'display_menu'."""
+        menu_choice = int(input("Select an option: "))
+        if menu_choice == 1 or 2:
+            self.login_or_signup()
+        elif menu_choice == 3:
+            sys.exit(0)
+        else:
+
+        # MODIFY METHOD ABOVE!
+
+
+    def login_or_signup(self):
+        """"""
+        pass
 
     def get_monthly_income(self):
         """Prompt user for their monthly income & return an integer."""
@@ -49,8 +81,6 @@ class BudgetCalculator:
                 else:
                     print("\nInvalid input! Please enter 'y' or 'n'.")
                     continue
-
-
 
     def calculate_budget_allocation(self):
         """
@@ -93,8 +123,6 @@ class BudgetCalculator:
 
     def update_monthly_budget(self):
         """Load existing data, modify/update it, and write it back to .json."""
-
-
         if self.month in self.data:
             # Add to existing earnings.
             self.data[self.month]["earnings"] += self.earnings
@@ -108,28 +136,38 @@ class BudgetCalculator:
             }
             # Percentages stay consistent (or ensure they exist).
             self.data[self.month]["percentages"] = {
-                "debt": 0.50,
-                "needs": 0.30,
-                "wants": 0.20,
+                "debt": self.debt_percent,
+                "needs": self.needs_percent,
+                "wants": self.wants_percent,
             }
         else:
             self.data[self.month] = self.budget_allocation   # Update dict. with month.
 
         with open(self.file_path, "w", encoding="utf-8") as file:
             json.dump(self.data, file, indent=4)
-
+        # Reload after saving (dumping) JSON  and write it to disk.
+        self.data = self.load_monthly_budget()
 
     def display_budget_summary(self):
         """A summarized view of money distribution based on 50/30/20 rule."""
-        print(f"\n---Budget Mate Summary Results---"
+        updated_earnings = self.data[self.month]["earnings"]
+        updated_debt_allocation = self.data[self.month]["allocations"]["debt"]
+        updated_needs_allocation = self.data[self.month]["allocations"]["needs"]
+        updated_wants_allocation = self.data[self.month]["allocations"]["wants"]
+
+        print(f"\n---Budget-Mate Summary Results---"
               f"\nAdded Earnings Amount - ${self.earnings}"
-              f"\nUpdated Earnings Total Amount for {self.month} - ${self.data[self.month]["earnings"]}"
-              f"\nDebt Allocation (50%) - ${self.data[self.month]["allocations"]["debt"]}"
-              f"\nNeeds Allocation (30%) - ${self.data[self.month]["allocations"]["needs"]}"
-              f"\nWants Allocation (20%) - ${self.data[self.month]["allocations"]["wants"]}")
+              f"\nUpdated Earnings Total Amount for {self.month} - ${updated_earnings}"
+              f"\nDebt Allocation (50%) - ${updated_debt_allocation}"
+              f"\nNeeds Allocation (30%) - ${updated_needs_allocation}"
+              f"\nWants Allocation (20%) - ${updated_wants_allocation}")
 
     def run_budget_mate(self):
         """Orchestrator method runs based on order of operations."""
+        self.greet_user()
+        self.display_menu()
+        self.get_menu_choice()
+        self.login_or_signup()
         self.get_monthly_income()
         self.calculate_budget_allocation()
         self.convert_budget_allocation_to_dict()

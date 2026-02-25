@@ -8,8 +8,17 @@ personal income based on a variation of the 50/30/20 rule (Debt/Needs/Wants).
 ## Extended App Capabilities
 * ~~Budget Mate will allow me to enter more than one source of income~~
 * ~~Budget Mate will allow me to add more income to current income amount for the current month~~
-* Budget Mate provides output consisting of their newly added earnings, total earnings, and updated category allocations
+* ~~Budget Mate provides output consisting of their newly added earnings, total earnings, and updated category 
+    allocations~~
+* Create a new method that greets the user
+* Create a new method that displays a user-friendly menu when called
+  * This will require method invocation (one method calls another method)
+* Add a feature that allows a user to enter his/her name:
+  * If their name exists, ask the user if they would like to continue adding to their saved monthly_budget.json file
+  * If their name does NOT exist, ask if they would like to create a new account
+  * Basically, allow user to login or signup depending on whether or not the user's name is recognized upon opening 
+    .json file 
 
 ## Refactoring Budget Mate
-* Cleanup the 'display_budget_summary' method when displaying updated earnings total amount & category allocations
-* Create a new method that displays a user friendly menu when called
+* ~~Cleanup the 'display_budget_summary' method when displaying updated earnings total amount & category allocations~~
+* 
