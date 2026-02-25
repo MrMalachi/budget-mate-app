@@ -25,40 +25,38 @@ class BudgetCalculator:
     def greet_user(self):
         """Print a neat greeting message to the user."""
         print(
-            "\nWelcome to Budget-Mate: "
-            "A Program Designed Around Money Management™"
+                "\nWelcome to Budget-Mate: "
+                "A Program Designed Around Money Management™"
         )
 
     def display_menu(self):
         """Print the menu options for the user."""
         print(
-            "\n--- BUDGET-MATE MENU ---"
-            "\n1. Add earnings"
-            "\n2. View Budget Mate summary"
-            "\n3. Exit"
+                "\n--- BUDGET-MATE MENU ---"
+                "\n1. Add earnings"
+                "\n2. View Budget Mate summary"
+                "\n3. Exit"
         )
 
     def get_menu_choice(self):
         """Prompt the user to select a menu option based on 'display_menu'."""
         menu_choice = int(input("Select an option: "))
-        if menu_choice == 1 or 2:
-            self.login_or_signup()
+        if menu_choice == 1:
+            self.get_monthly_income()
+        elif menu_choice == 2:
+            self.display_budget_summary()
         elif menu_choice == 3:
-            sys.exit(0)
-        else:
-
-        # MODIFY METHOD ABOVE!
-
+            self.save_and_exit()
 
     def login_or_signup(self):
-        """"""
+        """To be included in the future when using a database..."""
         pass
 
     def get_monthly_income(self):
         """Prompt user for their monthly income & return an integer."""
         while True:
             try:
-                amount = int(input("Enter an income amount you'd like to add: $"))
+                amount = int(input("\nEnter an income amount you'd like to add: $"))
                 if amount < 0:
                     raise ValueError
             except ValueError:
@@ -162,13 +160,16 @@ class BudgetCalculator:
               f"\nNeeds Allocation (30%) - ${updated_needs_allocation}"
               f"\nWants Allocation (20%) - ${updated_wants_allocation}")
 
+    def save_and_exit(self):
+        """Save data and exit the program intentionally."""
+        self.update_monthly_budget()
+        sys.exit("\nBudget-Mate data saved. Exiting program...")
+
     def run_budget_mate(self):
         """Orchestrator method runs based on order of operations."""
         self.greet_user()
         self.display_menu()
         self.get_menu_choice()
-        self.login_or_signup()
-        self.get_monthly_income()
         self.calculate_budget_allocation()
         self.convert_budget_allocation_to_dict()
         self.update_monthly_budget()
