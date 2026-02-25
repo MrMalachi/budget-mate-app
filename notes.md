@@ -29,6 +29,6 @@ personal income based on a variation of the 50/30/20 rule (Debt/Needs/Wants).
 ## Refactoring Budget Mate
 * ~~Cleanup the 'display_budget_summary' method when displaying updated earnings total amount & category allocations~~
 * There are two bugs in the 'display_menu' method:
-  * One error occurs only if there is no data in the monthly_budget.json file
-  * Another is a logical error that occurs when option 2 from the menu is selected - the 'display_method_summary' is
+  * A ValueError occurs only if there is no data in the monthly_budget.json file
+  * Another is a LogicalError that occurs when option 2 from the menu is selected - the 'display_method_summary' is
     called 2x
