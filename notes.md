@@ -20,4 +20,8 @@ personal income based on a variation of the 50/30/20 rule (Debt/Needs/Wants).
 
 ## Refactoring Budget Mate
 * ~~Cleanup the 'display_budget_summary' method when displaying updated earnings total amount & category allocations~~
-* 
+
+## Next Steps?
+* Create another script that conjoins `helper.py` and a program that tracks how much I have spent in all 3 categories
+  * This will allow me to not only allocate the proper funds to all 3 categories, but also actually track my remaining
+    funds after they are allocated
