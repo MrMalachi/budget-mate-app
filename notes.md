@@ -25,3 +25,4 @@ personal income based on a variation of the 50/30/20 rule (Debt/Needs/Wants).
 * Create another script that conjoins `helper.py` and a program that tracks how much I have spent in all 3 categories
   * This will allow me to not only allocate the proper funds to all 3 categories, but also actually track my remaining
     funds after they are allocated
+    * Would a child class deriving from the parent class `BudgetCalculator` be the most proficient way to do this?
