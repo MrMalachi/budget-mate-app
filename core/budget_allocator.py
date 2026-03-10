@@ -10,7 +10,7 @@ class BudgetAllocator:
     """
 
     # Stored class attributes.
-    file_path = "monthly_budget.json"
+    file_path = "data/monthly_budget.json"
     debt_percent = 0.50
     needs_percent = 0.30
     wants_percent = 0.20
