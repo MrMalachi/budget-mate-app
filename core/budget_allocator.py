@@ -44,7 +44,7 @@ class BudgetAllocator:
         )
 
     def get_menu_choice(self):
-        """Prompt the user to select a menu option based on 'display_menu'."""
+        """Prompt user to select a menu option based on 'display_menu'."""
         while True:
             try:
                 menu_choice = int(input("Select an option: "))

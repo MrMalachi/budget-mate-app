@@ -5,10 +5,11 @@ personal income based on a variation of the 50/30/20 rule (Debt/Needs/Wants).
 """
 # Imports the 'BudgetAllocator' class from the 'budget_allocator.py' file.
 from core.budget_allocator import BudgetAllocator
+from services.budget_tracker import BudgetTracker
 
 def main():
-    budget = BudgetAllocator()
-    budget.run_budget_mate()
+    app = BudgetTracker()   # Child class inherits everything from the parent.
+    app.run_budget_mate()
 
 if __name__ == "__main__":
     main()  # Ensures main() only runs if program is executed directly.
