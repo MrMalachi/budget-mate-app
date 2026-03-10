@@ -1,4 +1,4 @@
-from projects.budget_mate.core.budget_allocator import BudgetAllocator
+from core.budget_allocator import BudgetAllocator
 
 class BudgetTracker(BudgetAllocator):
     """
