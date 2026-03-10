@@ -26,3 +26,5 @@ personal income based on a variation of the 50/30/20 rule (Debt/Needs/Wants).
   * This will allow me to not only allocate the proper funds to all 3 categories, but also actually track my remaining
     funds after they are allocated
     * Would a child class deriving from the parent class `BudgetCalculator` be the most proficient way to do this?
+  * Create a child class that contains several different methods for calculating the remaining budget after a person
+    inputs their expenses for each category
