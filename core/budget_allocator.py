@@ -18,7 +18,7 @@ class BudgetAllocator:
     def __init__(self):
         """Define and assign instance attributes to their initial values."""
         self.earnings = 0
-        self.last_added = 0
+        self.last_added_earning = 0
         self.debt_funds = 0
         self.needs_funds = 0
         self.wants_funds = 0
@@ -33,29 +33,6 @@ class BudgetAllocator:
                 "\nWelcome to Budget-Mate: "
                 "A Program Designed Around Money Management™"
         )
-
-    def display_menu(self):
-        """Print the menu options for the user."""
-        print(
-                "\n--- BUDGET-MATE MENU ---"
-                "\n1. Add earnings"
-                "\n2. View Budget Mate summary"
-                "\n3. Exit"
-        )
-
-    def get_menu_choice(self):
-        """Prompt user to select a menu option based on 'display_menu'."""
-        while True:
-            try:
-                menu_choice = int(input("Select an option: "))
-            except ValueError:
-                print("\nInvalid input! Enter 1, 2, or 3.")
-                continue
-
-            if menu_choice in (1, 2, 3):
-                return menu_choice
-            else:
-                print("\nInvalid option! Enter 1, 2, or 3.")
 
     def get_monthly_income(self):
         """Prompt user for their monthly income & return an integer."""
@@ -102,6 +79,8 @@ class BudgetAllocator:
 
     def update_monthly_budget(self, amount):
         """Load existing data, modify/update it, and write it back to .json."""
+        self.data = self.load_monthly_budget()
+
         if self.month in self.data:
             # Add to existing earnings.
             self.data[self.month]["earnings"] += amount
@@ -134,6 +113,8 @@ class BudgetAllocator:
                 },
             }
 
+        Path(self.file_path).parent.mkdir(parents=True, exist_ok=True)
+
         with open(self.file_path, "w", encoding="utf-8") as file:
             json.dump(self.data, file, indent=4)
         # Reload after saving (dumping) JSON  and write it to disk.
@@ -142,7 +123,7 @@ class BudgetAllocator:
     def add_earnings(self):
         """Menu option1: add earnings for this session & save to JSON."""
         amount = self.get_monthly_income()
-        self.last_added = amount
+        self.last_added_earning = amount
         self.earnings += amount
         self.update_monthly_budget(amount)  # Persist ONLY the new amount.
 
@@ -164,7 +145,7 @@ class BudgetAllocator:
         updated_wants_allocation = self.data[self.month]["allocations"]["wants"]
 
         print(f"\n---Budget-Mate Summary Results---"
-              f"\nAdded Earnings Amount - ${self.last_added}"
+              f"\nAdded Earnings Amount - ${self.last_added_earning}"
               f"\nUpdated Earnings Total Amount for {self.month} - ${updated_earnings}"
               f"\nDebt Allocation (50%) - ${updated_debt_allocation}"
               f"\nNeeds Allocation (30%) - ${updated_needs_allocation}"
@@ -173,29 +154,6 @@ class BudgetAllocator:
     def exit_budget_mate(self):
         """Save data and exit the program intentionally."""
         sys.exit("\nExiting Budget-Mate...")
-
-    def run_budget_mate(self):
-        """Menu loop orchestrator."""
-        self.greet_user()
-
-        while True:
-            # Always refresh from disk so self.data does not go stale.
-            self.data = self.load_monthly_budget()
-
-            self.display_menu()
-            menu_choice = self.get_menu_choice()
-            if menu_choice is None:
-                continue
-
-            if menu_choice == 1:
-                self.add_earnings()
-                self.display_budget_summary()
-            elif menu_choice == 2:
-                self.display_budget_summary()
-            elif menu_choice == 3:
-                self.exit_budget_mate()
-            else:
-                print("\nInvalid option! Enter 1, 2, or 3.")
 
 
 
